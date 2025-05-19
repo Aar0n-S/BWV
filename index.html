@@ -22,7 +22,7 @@
       position:relative;
       transform-origin: center center;
     }
-    
+
    </style>
 </head>
 
@@ -57,6 +57,7 @@
       leaves.forEach(leaf =>{
         leaf.addEventListener('click',()=>{
           gsap.to(leaf,{
+            transformOrigin:"25% 25%",
             rotationY: 180, // Rotate the leaf on click
             y: -50,//move upwards
             //scale:1.2, //slightly enlarge the leaf 
