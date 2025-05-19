@@ -7,41 +7,26 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
    
    <style>
-    /*.leaf{
-        width:50px;
-        height:50px;
-        background-color:green;
-        border-radius:50%;
-        margin:10px;
-        cursor:pointer;
-        display:inline-block;
-        position:relative;
-        transform-origin: center center;
-    }*/
-    .img{
-      width:10%;
-      height:auto;
-      
-      border-radius:50%;
-      margin:10px;
-      cursor:pointer;
-      display:inline-block;
-      position:relative;
-      transform-origin: center center;
-    }
-
     .tree{
         display:flex;
         flex-wrap:wrap;
         max-width:500px;
     }
 
+    .leaf img {
+      width:50%;
+      height:auto;
+      margin:10px;
+      cursor:pointer;
+      display:inline-block;
+      position:relative;
+      transform-origin: center center;
+    }
+    
    </style>
 </head>
 
 <body>
-
-  <!--<img src="vines-5.png" alt="vine image">-->
 
   <div class="leaf">
     <img src="2d_leaf.png" alt="vine image"> 
@@ -59,7 +44,7 @@
       //GSAP animation with staggered effect
       gsap.from(".leaf",{
         rotationY:180,
-        scale:0,
+        //scale:0,
         opacity:0,
         duration:1,
         stagger:0.5,
@@ -74,7 +59,7 @@
           gsap.to(leaf,{
             rotationY: 180, // Rotate the leaf on click
             y: -50,//move upwards
-            scale:1.2, //slightly enlarge the leaf 
+            //scale:1.2, //slightly enlarge the leaf 
             duration:1,//duration of the animation 
             ease:'power1.inOut'//smoothing easing for rotation and movement
           });
