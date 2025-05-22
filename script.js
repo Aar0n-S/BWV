@@ -24,7 +24,7 @@ leaves.forEach(leaf => {
       y: -50,//move upwards
       //scale:1.2, //slightly enlarge the leaf 
       duration: 1,//duration of the animation 
-      repeat:2,
+      //repeat:2,
       ease: 'power1.inOut'//smoothing easing for rotation and movement
     });
   });
