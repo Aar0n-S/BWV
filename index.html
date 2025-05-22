@@ -1,72 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Leaf animation</title> 
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
-   
-   <style>
-    .tree{
-        display:flex;
-        flex-wrap:wrap;
-        max-width:500px;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaf animation</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
 
-    .leaf img {
-      width:50%;
-      height:auto;
-      margin:10px;
-      cursor:pointer;
-      display:inline-block;
-      position:relative;
-      transform-origin: center center;
-    }
-
-   </style>
+  <script defer src="script.js"></script> 
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
   <div class="leaf">
-    <img src="2d_leaf.png" alt="vine image"> 
+    <img src="2d_leaf.png" alt="vine image">
   </div>
-  
+
   <div class="tree">
-        <div class="leaf" id="leaf1"></div>
-        <div class="leaf" id="leaf2"></div>
-        <div class="leaf" id="leaf3"></div>
-        <div class="leaf" id="leaf4"></div>
-        <div class="leaf" id="leaf5"></div>
-    </div>
-
-    <script>
-      //GSAP animation with staggered effect
-      gsap.from(".leaf",{
-        rotationY:180,
-        //scale:0,
-        opacity:0,
-        duration:1,
-        stagger:0.5,
-        ease:"power3.out"
-      });
-
-      //Add click event to trigger animation on individual leaves
-      const leaves = document.querySelectorAll('.leaf');
-
-      leaves.forEach(leaf =>{
-        leaf.addEventListener('click',()=>{
-          gsap.to(leaf,{
-            transformOrigin:"25% 25%",
-            rotationY: 180, // Rotate the leaf on click
-            y: -50,//move upwards
-            //scale:1.2, //slightly enlarge the leaf 
-            duration:1,//duration of the animation 
-            ease:'power1.inOut'//smoothing easing for rotation and movement
-          });
-        });
-      });
-    </script>
+    <div class="leaf" id="leaf1"></div>
+    <div class="leaf" id="leaf2"></div>
+    <div class="leaf" id="leaf3"></div>
+    <div class="leaf" id="leaf4"></div>
+    <div class="leaf" id="leaf5"></div>
+  </div>
 
 </body>
+
 </html>

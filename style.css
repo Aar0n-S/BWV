@@ -1,0 +1,15 @@
+ .tree {
+   display: flex;
+   flex-wrap: wrap;
+   max-width: 500px;
+ }
+
+ .leaf img {
+   width: 50%;
+   height: auto;
+   margin: 10px;
+   cursor: pointer;
+   display: inline-block;
+   position: relative;
+   transform-origin: center center;
+ }
