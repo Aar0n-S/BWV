@@ -13,3 +13,14 @@
    position: relative;
    transform-origin: center center;
  }
+
+ .flippedLeaf img {
+   width: 50%;
+   height: auto;
+   margin: 10px;
+   cursor: pointer;
+   display: inline-block;
+   transform: rotateY(180deg);
+   position: relative;
+   transform-origin: center center;
+ }
