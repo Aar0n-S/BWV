@@ -26,7 +26,6 @@ leaves.forEach(leaf => {
         ease: 'power1.inOut'//smoothing easing for rotation and movement
       });
       flipped = true;
-      console.log(flipped);
     } else {
       gsap.to(leaf, {
         transformOrigin: "25% 25%",
@@ -36,7 +35,6 @@ leaves.forEach(leaf => {
         ease: 'power1.inOut'//smoothing easing for rotation and movement
       });
       flipped = false;
-      console.log(flipped);
     }
   });
 });
