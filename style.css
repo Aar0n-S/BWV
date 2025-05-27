@@ -1,24 +1,27 @@
- /*body {
-   background-image: url("assets/treeTest.png");
-   background-repeat: no-repeat;
-   background-size: auto;
- }*/
 
  .backgroundContainer {
    border: 3px solid green;
    display: flex;
-   flex-wrap:wrap;
+   flex-wrap: wrap;
    justify-content: center;
-   margin-inline:auto;
-   /*align-items: center;*/
+   margin-inline: auto;
    max-width: 100%;
-   /*object-fit: contain;*/
-   /*flex: 1 1 auto;*/
+   position: relative;
+   
  }
 
- .backgroundContainer img{
-  width: 100%;
-  height:auto;
+ .backgroundContainer img {
+   width: 100%;
+   height: auto;
+ }
+
+ .frontLeaf img {
+   width: 50%;
+   height: auto;
+   position: absolute;
+   top: 40px;
+   left: 40px;
+   
  }
 
  .leaf img {
@@ -27,9 +30,8 @@
    margin: 10px;
    cursor: pointer;
    display: inline-block;
-   position: relative;
    transform-origin: center center;
-   
+   position: relative;
  }
 
  .flippedLeaf img {
@@ -39,8 +41,8 @@
    cursor: pointer;
    display: inline-block;
    transform: rotateY(180deg);
-   position: relative;
    transform-origin: center center;
+   position: relative;  
  }
 
  .tree {
