@@ -1,52 +1,91 @@
+body {
+  overflow-x: hidden;
+}
 
- .backgroundContainer {
-   border: 3px solid green;
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-   margin-inline: auto;
-   max-width: 100%;
-   position: relative;
-   
- }
+.backgroundContainer {
+  border: 3px solid green;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-inline: auto;
+  max-width: 100%;
+  position: relative;
+}
 
- .backgroundContainer img {
-   width: 100%;
-   height: auto;
- }
+.backgroundContainer img {
+  width: 100%;
+  height: auto;
+}
 
- .frontLeaf img {
-   width: 50%;
-   height: auto;
-   position: absolute;
-   top: 40px;
-   left: 40px;
-   
- }
+.tree .leaf {
+  height: 5%;
+  width: 10%;
+  /* background-color: blue; */
+  border-radius: 2rem;
+  cursor: pointer;
+}
 
- .leaf img {
-   width: 50%;
-   height: auto;
-   margin: 10px;
-   cursor: pointer;
-   display: inline-block;
-   transform-origin: center center;
-   position: relative;
- }
+.tree .leaf img {
+  width: 100%;
+  height: auto;
+  transform: rotateY(180deg) rotateZ(-90deg);
+}
 
- .flippedLeaf img {
-   width: 50%;
-   height: auto;
-   margin: 10px;
-   cursor: pointer;
-   display: inline-block;
-   transform: rotateY(180deg);
-   transform-origin: center center;
-   position: relative;  
- }
+#leaf1 {
+  position: absolute;
+  top: 58%;
+  left: 7%;
+}
 
- .tree {
-   display: flex;
-   flex-wrap: wrap;
-   max-width: 500px;
- }
+#leaf2 {
+  position: absolute;
+  top: 49%;
+  left: 14%;
+}
+
+#leaf3 {
+  position: absolute;
+  top: 55%;
+  left: 20%;
+}
+
+#leaf4 {
+  position: absolute;
+  top: 35%;
+  right: 18%;
+}
+
+#leaf5 {
+  position: absolute;
+  top: 45%;
+  right: 14%;
+}
+
+#leaf6 {
+  position: absolute;
+  top: 40%;
+  right: 30%;
+}
+
+.bwv-display-message-box {
+  display: none;
+
+  max-width: 42%;
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  font-size: clamp(1rem, 0.34vi + 0.91rem, 1.19rem);
+
+  z-index: 9999999;
+}
+
+.bwv-display-message-box p {
+  padding: 0;
+  margin: 0;
+}
