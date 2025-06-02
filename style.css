@@ -105,18 +105,20 @@ blockquote {
 
 .bwv-display-message-box {
   display: none;
-
+  border: 3px solid green;
   max-width: 42%;
+  max-height: 35%;
   position: absolute;
 
   top: 50%;
-  left: 50%;
+  left: 49%;
   transform: translate(-50%, -50%);
 
   font-weight: bold;
   color: white;
   text-align: center;
-  font-size: clamp(1rem, 0.34vi + 0.91rem, 1.19rem);
+  /* font-size: clamp(1rem, 0.34vi + 0.91rem, 1.19rem); */
+  font-size: calc(1vw + 1vh);
 
   z-index: 9999999;
 }
