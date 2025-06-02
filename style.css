@@ -5,14 +5,15 @@ body {
 header {
   background: #8F0050; 
   color: #FCEBA7;
-  font-size: 2.5rem;
+  /* font-size: 2.5rem; */
   padding: 2rem;
   margin-bottom: 25px;
   max-width: 100%;
 }
 
-header p{
+header h1{
   max-width: 100%;
+  font-size: calc(4vw + 4vh);
 }
 
 h1,
@@ -25,8 +26,8 @@ blockquote {
 }
 
 .introduction {
-  background: #8F0050;
-  color: #FCEBA7;
+  background: rgba(252, 235, 167, 0.5);
+  color: rgba(143, 0, 80, 1);
   display: flex;
   flex-wrap: wrap;
   margin-inline: auto;
@@ -37,6 +38,7 @@ blockquote {
 
 .introduction p{
   font-size: calc(1.1vw + 1.1vh);
+  opacity: 1;
 }
 
 .backgroundContainer {
