@@ -18,6 +18,7 @@ leaves.forEach((leaf, idx) => {
     );
     leaf.addEventListener('click', () => {
         const txt = msgBoxes[idx];
+        console.log(leafPositions[idx].top);
 
         if (currFlipped == null || currFlipped == idx) {
             if (currFlipped == null) {currFlipped = idx}
