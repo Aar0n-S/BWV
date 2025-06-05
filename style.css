@@ -3,7 +3,7 @@ body {
 }
 
 header {
-  background: #8F0050; 
+  background: #8F0050;
   color: #FCEBA7;
   /* font-size: 2.5rem; */
   padding: 2rem;
@@ -11,7 +11,7 @@ header {
   max-width: 100%;
 }
 
-header h1{
+header h1 {
   max-width: 100%;
   font-size: calc(4vw + 4vh);
 }
@@ -33,11 +33,11 @@ blockquote {
   margin-inline: auto;
   max-width: 100%;
   position: absolute;
-  
+
 }
 
-.introduction p{
-  font-size: calc(1.1vw + 1.1vh);
+.introduction p {
+  /* font-size: calc(1.1vw + 1.1vh); */
   opacity: 1;
 }
 
@@ -56,14 +56,28 @@ blockquote {
   height: auto;
 }
 
-.tree .leaf {
+.DesktopTree .leaf {
   height: 5%;
   width: 10%;
   border-radius: 2rem;
   cursor: pointer;
 }
 
-.tree .leaf img {
+.DesktopTree .leaf img {
+  width: 100%;
+  height: auto;
+  transform: rotateY(180deg) rotateZ(-90deg);
+}
+
+.mobileTree .leaf {
+  position: absolute;
+  height: 5%;
+  width: 10%;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
+.mobileTree .leaf img {
   width: 100%;
   height: auto;
   transform: rotateY(180deg) rotateZ(-90deg);
@@ -105,6 +119,12 @@ blockquote {
   right: 30%;
 }
 
+#leaf7 {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+}
+
 .bwv-display-message-box {
   display: none;
   border: 3px solid green;
@@ -119,8 +139,8 @@ blockquote {
   font-weight: bold;
   color: white;
   text-align: center;
-  /* font-size: clamp(1rem, 0.34vi + 0.91rem, 1.19rem); */
-  font-size: calc(1vw + 1vh);
+  font-size: clamp(1rem, 0.34vi + 0.91rem, 1.19rem);
+  /* font-size: calc(1vw + 1vh); */
 
   z-index: 9999999;
 }
@@ -128,4 +148,32 @@ blockquote {
 .bwv-display-message-box p {
   padding: 0;
   margin: 0;
+}
+
+@media screen and (min-width: 480px) {
+  .mobileTree {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  
+  .backgroundContainer > img {
+    display: none;
+  }
+
+  .DesktopTree {
+    display: none;
+  }
+
+  .introduction {
+    background: rgba(252, 235, 167, 0.5);
+    color: rgba(143, 0, 80, 1);
+    display: flex;
+    flex-wrap: wrap;
+    margin-inline: auto;
+    max-width: 100%;
+    position: absolute;
+    top: 10px;
+  }
 }
