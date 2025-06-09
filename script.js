@@ -1,6 +1,6 @@
 const ANIMATION_DURATION = 1.25;
 
-const messages = document.querySelectorAll('.bwv-display-message-box');
+const messages = Array.from(document.querySelectorAll('.bwv-display-message-box'));
 
 const mq = window.matchMedia('(max-width: 40em)');
 
@@ -173,6 +173,10 @@ customElements.define('leaf-element', Leaf);
 
 Leaf.LEAVES.forEach((leaf, idx) => {
     leaf.addEventListener('click', () => {
+        // If there is an active message which isn't this one, do nothing
+        if (messages.some(msg => msg.classList.contains('active')) && !messages[idx].classList.contains('active')) {
+            return;
+        }
         if (messages[idx].classList.contains('active')) {
             messages[idx].classList.toggle('active');
         } else {
