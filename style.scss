@@ -1,0 +1,195 @@
+@import url(https://fonts.bunny.net/css?family=lato:700|montserrat:400);
+
+:root {
+  // Colours
+  --main-color: #8F0050;
+  --secondary-color: #FCEBA7;
+
+  // Font Sizes
+  --fs-sm: clamp(0.8rem, 0.17vi + 0.76rem, 0.89rem);
+  --fs-base: clamp(1rem, 0.34vi + 0.91rem, 1.19rem);
+  --fs-md: clamp(1.25rem, 0.61vi + 1.1rem, 1.58rem);
+  --fs-lg: clamp(1.56rem, 1vi + 1.31rem, 2.11rem);
+  --fs-xl: clamp(1.95rem, 1.56vi + 1.56rem, 2.81rem);
+  --fs-xxl: clamp(2.44rem, 2.38vi + 1.85rem, 3.75rem);
+  --fs-xxxl: clamp(3.05rem, 3.54vi + 2.17rem, 5rem);
+
+  // Typefaces
+  --font-header: 'Lato', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji, sans-serif;
+  --font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji, sans-serif;
+}
+
+// Basic Reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-header), sans-serif;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: var(--fs-xl);
+}
+
+// Body Text
+p, blockquote {
+  margin-block: 1em;
+  line-height: 1.5;
+  font-family: var(--font-body), sans-serif;
+  font-weight: 400;
+  font-size: var(--fs-base);
+}
+
+// Header
+header {
+  display: flex;
+  width: 100%;
+
+  > img {
+    width: 80%;
+    height: auto;
+  }
+}
+
+// Main Content
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-inline: auto;
+  max-width: 100%;
+}
+
+.introduction {
+  padding-inline: 8vw;
+
+  blockquote {
+    font-style: italic;
+    color: var(--main-color);
+  }
+}
+
+.tree {
+  width: 100%;
+  height: auto;
+  position: relative;
+
+  > img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+button[is="leaf-element"] {
+  position: absolute;
+  border: none;
+  background: none;
+  height: auto;
+  width: 8%;
+  transform: rotateY(180deg) rotateZ(-90deg);
+  transform-origin: center;
+  cursor: pointer;
+  z-index: 0;
+
+  > img {
+    width: 100%;
+    height: auto;
+  }
+
+  &:nth-of-type(1) {
+    top: 60%;
+    left: 11%;
+  }
+
+  &:nth-of-type(2) {
+    top: 51%;
+    left: 18%;
+  }
+
+  &:nth-of-type(3) {
+    top: 60%;
+    left: 24%;
+  }
+
+  &:nth-of-type(4) {
+    top: 35%;
+    right: 15%;
+  }
+
+  &:nth-of-type(5) {
+    top: 45%;
+    right: 12%;
+  }
+
+  &:nth-of-type(6) {
+    top: 43%;
+    right: 24%;
+  }
+}
+
+.bwv-display-message-box {
+  display: none;
+  max-width: 42%;
+  max-height: 35%;
+  position: absolute;
+  top: 50%;
+  left: 49%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  pointer-events: none;
+  z-index: 5;
+
+  &.active {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 40em) {
+  header {
+    justify-content: center;
+
+    > img {
+      margin-inline: auto;
+    }
+  }
+
+  .tree {
+    > img {
+      display: none;
+    }
+    min-height: 100vh;
+  }
+
+  button[is="leaf-element"] {
+    width: 50%;
+
+    &:nth-of-type(1) {
+      top: 16%;
+      left: 32%;
+    }
+
+    &:nth-of-type(2) {
+      top: 32%;
+      left: 72%;
+      transform: rotateY(0deg) rotateZ(-90deg);
+    }
+
+    &:nth-of-type(3) {
+      top: 52%;
+      left: 26%;
+    }
+
+    &:nth-of-type(4),
+    &:nth-of-type(5),
+    &:nth-of-type(6) {
+      display: none;
+    }
+  }
+}

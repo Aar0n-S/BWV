@@ -1,91 +1,166 @@
-body {
-  overflow-x: hidden;
+@import url(https://fonts.bunny.net/css?family=lato:700|montserrat:400);
+:root {
+  --main-color: #8F0050;
+  --secondary-color: #FCEBA7;
+  --fs-sm: clamp(0.8rem, 0.17vi + 0.76rem, 0.89rem);
+  --fs-base: clamp(1rem, 0.34vi + 0.91rem, 1.19rem);
+  --fs-md: clamp(1.25rem, 0.61vi + 1.1rem, 1.58rem);
+  --fs-lg: clamp(1.56rem, 1vi + 1.31rem, 2.11rem);
+  --fs-xl: clamp(1.95rem, 1.56vi + 1.56rem, 2.81rem);
+  --fs-xxl: clamp(2.44rem, 2.38vi + 1.85rem, 3.75rem);
+  --fs-xxxl: clamp(3.05rem, 3.54vi + 2.17rem, 5rem);
+  --font-header: "Lato", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji, sans-serif;
+  --font-body: "Montserrat", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji, sans-serif;
 }
 
-.backgroundContainer {
-  border: 3px solid green;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-header), sans-serif;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: var(--fs-xl);
+}
+
+p, blockquote {
+  margin-block: 1em;
+  line-height: 1.5;
+  font-family: var(--font-body), sans-serif;
+  font-weight: 400;
+  font-size: var(--fs-base);
+}
+
+header {
+  display: flex;
+  width: 100%;
+}
+header > img {
+  width: 80%;
+  height: auto;
+}
+
+main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin-inline: auto;
   max-width: 100%;
+}
+
+.introduction {
+  padding-inline: 8vw;
+}
+.introduction blockquote {
+  font-style: italic;
+  color: var(--main-color);
+}
+
+.tree {
+  width: 100%;
+  height: auto;
   position: relative;
 }
-
-.backgroundContainer img {
+.tree > img {
   width: 100%;
   height: auto;
 }
 
-.tree .leaf {
-  height: 5%;
-  width: 10%;
-  /* background-color: blue; */
-  border-radius: 2rem;
-  cursor: pointer;
-}
-
-.tree .leaf img {
-  width: 100%;
+button[is=leaf-element] {
+  position: absolute;
+  border: none;
+  background: none;
   height: auto;
+  width: 8%;
   transform: rotateY(180deg) rotateZ(-90deg);
+  transform-origin: center;
+  cursor: pointer;
+  z-index: 0;
 }
-
-#leaf1 {
-  position: absolute;
-  top: 58%;
-  left: 7%;
+button[is=leaf-element] > img {
+  width: 100%;
+  height: auto;
 }
-
-#leaf2 {
-  position: absolute;
-  top: 49%;
-  left: 14%;
+button[is=leaf-element]:nth-of-type(1) {
+  top: 60%;
+  left: 11%;
 }
-
-#leaf3 {
-  position: absolute;
-  top: 55%;
-  left: 20%;
+button[is=leaf-element]:nth-of-type(2) {
+  top: 51%;
+  left: 18%;
 }
-
-#leaf4 {
-  position: absolute;
+button[is=leaf-element]:nth-of-type(3) {
+  top: 60%;
+  left: 24%;
+}
+button[is=leaf-element]:nth-of-type(4) {
   top: 35%;
-  right: 18%;
+  right: 15%;
 }
-
-#leaf5 {
-  position: absolute;
+button[is=leaf-element]:nth-of-type(5) {
   top: 45%;
-  right: 14%;
+  right: 12%;
 }
-
-#leaf6 {
-  position: absolute;
-  top: 40%;
-  right: 30%;
+button[is=leaf-element]:nth-of-type(6) {
+  top: 43%;
+  right: 24%;
 }
 
 .bwv-display-message-box {
   display: none;
-
   max-width: 42%;
+  max-height: 35%;
   position: absolute;
-
   top: 50%;
-  left: 50%;
+  left: 49%;
   transform: translate(-50%, -50%);
-
   font-weight: bold;
   color: white;
   text-align: center;
-  font-size: clamp(1rem, 0.34vi + 0.91rem, 1.19rem);
-
-  z-index: 9999999;
+  pointer-events: none;
+  z-index: 5;
+}
+.bwv-display-message-box.active {
+  display: block;
 }
 
-.bwv-display-message-box p {
-  padding: 0;
-  margin: 0;
+@media screen and (max-width: 40em) {
+  header {
+    justify-content: center;
+  }
+  header > img {
+    margin-inline: auto;
+  }
+  .tree {
+    min-height: 100vh;
+  }
+  .tree > img {
+    display: none;
+  }
+  button[is=leaf-element] {
+    width: 50%;
+  }
+  button[is=leaf-element]:nth-of-type(1) {
+    top: 16%;
+    left: 32%;
+  }
+  button[is=leaf-element]:nth-of-type(2) {
+    top: 32%;
+    left: 72%;
+    transform: rotateY(0deg) rotateZ(-90deg);
+  }
+  button[is=leaf-element]:nth-of-type(3) {
+    top: 52%;
+    left: 26%;
+  }
+  button[is=leaf-element]:nth-of-type(4), button[is=leaf-element]:nth-of-type(5), button[is=leaf-element]:nth-of-type(6) {
+    display: none;
+  }
 }
+
+/*# sourceMappingURL=style.css.map */
