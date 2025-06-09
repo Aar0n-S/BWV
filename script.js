@@ -1,4 +1,9 @@
 const ANIMATION_DURATION = 1.25;
+
+const messages = document.querySelectorAll('.bwv-display-message-box');
+
+const mq = window.matchMedia('(max-width: 40em)');
+
 class Leaf extends HTMLElement {
     static CONFIG = {
         states: {
@@ -41,11 +46,14 @@ class Leaf extends HTMLElement {
     }
 
     initialiseEventListeners() {
-        this.addEventListener('click', () => this.handleLeafClick());
+        this.addEventListener('click', (e) => this.handleLeafClick(e));
         window.addEventListener('resize', () => this.handleResize());
     }
 
-    handleLeafClick() {
+    handleLeafClick(e) {
+        e.preventDefault();
+        e.currentTarget.blur();
+
         if (this.initialPosition === null || this.initialRotation === null) this.initPositioning();
 
         // Don't allow expansion if another leaf is already expanded
@@ -57,6 +65,8 @@ class Leaf extends HTMLElement {
     }
 
     handleResize() {
+        messages.forEach(message => message.classList.remove('active'));
+
         this.setAttribute('data-expanded', 'false');
 
         this.removeAttribute('style');
@@ -73,7 +83,6 @@ class Leaf extends HTMLElement {
             xPercent: -50,
             yPercent: -50
         });
-
 
         // Force a reflow
         this.offsetHeight;
@@ -122,20 +131,23 @@ class Leaf extends HTMLElement {
             config.position = this.initialPosition;
             config.rotation = this.initialRotation;
         }
+        else {
+            config.scale = mq.matches ? 3.5 : 7.5;
+        }
         return {...config, animation: Leaf.CONFIG.animation};
     }
 
-    // scrollToLeaf() {
-    //     const rect = this.getBoundingClientRect();
-    //     const elementCenter = rect.top + window.scrollY + (rect.height / 2);
-    //     const windowCenter = window.innerHeight / 2;
-    //     const scrollToPosition = elementCenter - windowCenter;
-    //
-    //     window.scrollTo({
-    //         top: scrollToPosition,
-    //         behavior: 'smooth'
-    //     });
-    // }
+    scrollToLeaf() {
+        const rect = this.getBoundingClientRect();
+        const elementCenter = rect.top + window.scrollY + (rect.height / 2);
+        const windowCenter = window.innerHeight / 2;
+        const scrollToPosition = elementCenter - windowCenter;
+
+        window.scrollTo({
+            top: scrollToPosition,
+            behavior: 'smooth'
+        });
+    }
 
     animateLeaf(config) {
         gsap.to(this, {
@@ -150,7 +162,7 @@ class Leaf extends HTMLElement {
                 if (this.isExpanded) this.style.zIndex = config.zIndex;
             },
             onComplete: () => {
-                // if (this.isExpanded) this.scrollToLeaf();
+                if (this.isExpanded) this.scrollToLeaf();
                 if (!this.isExpanded) this.style.zIndex = config.zIndex;
             }
         });
@@ -158,8 +170,6 @@ class Leaf extends HTMLElement {
 }
 
 customElements.define('leaf-element', Leaf);
-
-const messages = document.querySelectorAll('.bwv-display-message-box');
 
 Leaf.LEAVES.forEach((leaf, idx) => {
     leaf.addEventListener('click', () => {

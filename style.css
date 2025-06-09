@@ -36,6 +36,10 @@ p, blockquote {
   font-size: var(--fs-base);
 }
 
+.tree {
+  overflow-x: hidden;
+}
+
 header {
   display: flex;
   width: 100%;
@@ -137,26 +141,28 @@ button[is=leaf-element]:nth-of-type(6) {
     margin-inline: auto;
   }
   .tree {
-    min-height: 100vh;
+    height: 75vh;
   }
   .tree > img {
     display: none;
   }
   button[is=leaf-element] {
+    height: 12rem;
     width: 50%;
+    min-width: 10rem;
   }
   button[is=leaf-element]:nth-of-type(1) {
-    top: 16%;
+    top: 32%;
     left: 32%;
   }
   button[is=leaf-element]:nth-of-type(2) {
-    top: 32%;
-    left: 72%;
+    top: 48%;
+    left: 76%;
     transform: rotateY(0deg) rotateZ(-90deg);
   }
   button[is=leaf-element]:nth-of-type(3) {
-    top: 52%;
-    left: 26%;
+    top: 72%;
+    left: 32%;
   }
   button[is=leaf-element]:nth-of-type(4), button[is=leaf-element]:nth-of-type(5), button[is=leaf-element]:nth-of-type(6) {
     display: none;
