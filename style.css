@@ -91,27 +91,27 @@ button[is=leaf-element] > img {
   height: auto;
 }
 button[is=leaf-element]:nth-of-type(1) {
-  top: 38%;
+  top: 52%;
   left: 14%;
 }
 button[is=leaf-element]:nth-of-type(2) {
-  top: 31%;
+  top: 43%;
   left: 22%;
 }
 button[is=leaf-element]:nth-of-type(3) {
-  top: 40%;
+  top: 50%;
   left: 29%;
 }
 button[is=leaf-element]:nth-of-type(4) {
-  top: 22%;
+  top: 31%;
   right: 15%;
 }
 button[is=leaf-element]:nth-of-type(5) {
-  top: 30%;
-  right: 6%;
+  top: 41%;
+  right: 9%;
 }
 button[is=leaf-element]:nth-of-type(6) {
-  top: 27%;
+  top: 38%;
   right: 24%;
 }
 

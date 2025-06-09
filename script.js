@@ -1,4 +1,4 @@
-const ANIMATION_DURATION = 1.25;
+const ANIMATION_DURATION = .85;
 
 const messages = Array.from(document.querySelectorAll('.bwv-display-message-box'));
 
