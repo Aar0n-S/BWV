@@ -125,17 +125,17 @@ class Leaf extends HTMLElement {
         return {...config, animation: Leaf.CONFIG.animation};
     }
 
-    scrollToLeaf() {
-        const rect = this.getBoundingClientRect();
-        const elementCenter = rect.top + window.scrollY + (rect.height / 2);
-        const windowCenter = window.innerHeight / 2;
-        const scrollToPosition = elementCenter - windowCenter;
-
-        window.scrollTo({
-            top: scrollToPosition,
-            behavior: 'smooth'
-        });
-    }
+    // scrollToLeaf() {
+    //     const rect = this.getBoundingClientRect();
+    //     const elementCenter = rect.top + window.scrollY + (rect.height / 2);
+    //     const windowCenter = window.innerHeight / 2;
+    //     const scrollToPosition = elementCenter - windowCenter;
+    //
+    //     window.scrollTo({
+    //         top: scrollToPosition,
+    //         behavior: 'smooth'
+    //     });
+    // }
 
     animateLeaf(config) {
         gsap.to(this, {
