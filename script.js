@@ -1,8 +1,24 @@
+gsap.registerPlugin(ScrollToPlugin);
+
 const ANIMATION_DURATION = .85;
 
 const messages = Array.from(document.querySelectorAll('.bwv-display-message-box'));
 
 const mq = window.matchMedia('(max-width: 40em)');
+
+const overlay = document.querySelector('.overlay');
+
+async function focusAndScroll(el) {
+    el.focus();
+
+    await gsap.to(window, {
+        duration: 0.5,
+        scrollTo: {
+            y: el,
+        },
+        ease: "power2.out"
+    });
+}
 
 class Leaf extends HTMLElement {
     static CONFIG = {
@@ -130,23 +146,10 @@ class Leaf extends HTMLElement {
         if (this.isExpanded) {
             config.position = this.initialPosition;
             config.rotation = this.initialRotation;
-        }
-        else {
+        } else {
             config.scale = mq.matches ? 3.5 : 7.5;
         }
         return {...config, animation: Leaf.CONFIG.animation};
-    }
-
-    scrollToLeaf() {
-        const rect = this.getBoundingClientRect();
-        const elementCenter = rect.top + window.scrollY + (rect.height / 2);
-        const windowCenter = window.innerHeight / 2;
-        const scrollToPosition = elementCenter - windowCenter;
-
-        window.scrollTo({
-            top: scrollToPosition,
-            behavior: 'smooth'
-        });
     }
 
     animateLeaf(config) {
@@ -162,7 +165,6 @@ class Leaf extends HTMLElement {
                 if (this.isExpanded) this.style.zIndex = config.zIndex;
             },
             onComplete: () => {
-                if (this.isExpanded) this.scrollToLeaf();
                 if (!this.isExpanded) this.style.zIndex = config.zIndex;
             }
         });
@@ -179,9 +181,16 @@ Leaf.LEAVES.forEach((leaf, idx) => {
         }
         if (messages[idx].classList.contains('active')) {
             messages[idx].classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = 'initial';
         } else {
             setTimeout(() => {
                 messages[idx].classList.toggle('active');
+                overlay.classList.toggle('active');
+                focusAndScroll(leaf).then(() => {
+                        document.body.style.overflow = 'hidden';
+                    }
+                )
             }, ANIMATION_DURATION * 1000)
         }
 

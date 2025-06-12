@@ -37,7 +37,7 @@ p, blockquote {
 }
 
 .tree {
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 header {
@@ -63,6 +63,23 @@ main {
 .introduction blockquote {
   font-style: italic;
   color: var(--main-color);
+}
+
+.overlay {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  backdrop-filter: blur(5rem);
+  opacity: 80%;
+  position: fixed;
+  z-index: 1;
+  display: none;
+}
+
+.active {
+  display: block !important;
 }
 
 .tree {
@@ -128,9 +145,6 @@ button[is=leaf-element]:nth-of-type(6) {
   text-align: center;
   pointer-events: none;
   z-index: 5;
-}
-.bwv-display-message-box.active {
-  display: block;
 }
 
 @media screen and (max-width: 40em) {

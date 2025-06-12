@@ -46,7 +46,7 @@ p, blockquote {
 }
 
 .tree {
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 // Header
@@ -76,6 +76,24 @@ main {
     font-style: italic;
     color: var(--main-color);
   }
+}
+
+// Overlay
+.overlay {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  backdrop-filter: blur(5rem);
+  opacity: 80%;
+  position: fixed;
+  z-index: 1;
+  display: none;
+}
+
+.active {
+  display: block !important;
 }
 
 .tree {
@@ -149,10 +167,6 @@ button[is="leaf-element"] {
   text-align: center;
   pointer-events: none;
   z-index: 5;
-
-  &.active {
-    display: block;
-  }
 }
 
 @media screen and (max-width: 40em) {
@@ -168,6 +182,7 @@ button[is="leaf-element"] {
     > img {
       display: none;
     }
+
     min-height: 32rem;
     height: 75vh;
   }
