@@ -73,7 +73,7 @@ class Leaf extends HTMLElement {
     }
 
     handleLeafMouseOver() {
-        if (this.isExpanded || this.isAnimating) {
+        if (this.isExpanded || this.isAnimating || mq.matches) {
             return;
         }
         if (this.initialPosition === null || this.initialRotation === null) this.initPositioning();
@@ -103,7 +103,7 @@ class Leaf extends HTMLElement {
     }
 
     handleLeafMouseLeave() {
-        if (this.isExpanded || this.isAnimating) {
+        if (this.isExpanded || this.isAnimating || mq.matches) {
             return;
         }
         // Kill any ongoing animations
