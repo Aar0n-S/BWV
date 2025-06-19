@@ -1,72 +1,213 @@
-class LeafManager {
+gsap.registerPlugin(ScrollToPlugin);
+
+const ANIMATION_DURATION = .85;
+const messages = Array.from(document.querySelectorAll('.bwv-display-message-box'));
+const mq = window.matchMedia('(max-width: 40em)');
+const overlay = document.querySelector('.overlay');
+
+class Leaf extends HTMLElement {
     static CONFIG = {
-        default: {
-            scale: 1,
-            rotation: { y: 0, z: 0 },
-            position: 'original',
-            zIndex: 0
-        },
-        expanded: {
-            scale: 7.5,
-            rotation: { y: 180, z: -45 },
-            position: { top: '50%', left: '50%' },
-            transform: { x: -50, y: -50 },
-            zIndex: 999999,
+        states: {
+            default: {
+                scale: 1,
+                rotation: {x: 0, y: 0, z: 0},
+                position: {top: 0, left: 0},
+                zIndex: 0
+            },
+            expanded: {
+                scale: 7.5,
+                rotation: {x: 180, y: 180, z: 45},
+                position: {top: '50%', left: '50%'},
+                zIndex: 2,
+            }
         },
         animation: {
-            duration: 1,
-            ease: 'power1.inOut'
-        }
+            duration: ANIMATION_DURATION,
+            ease: 'sine.inOut'
+        },
     };
 
+    static LEAVES = Array.from(document.querySelectorAll('button[is="leaf-element"]'));
+
     constructor() {
-        this.leaves = document.querySelectorAll('.leaf');
-        this.messageBoxes = document.querySelectorAll('.bwv-display-message-box');
-        this.positions = this.calculatePositions();
-        this.activeIndex = null;
+        super();
+        this.initialPosition = null;
+        this.initialRotation = null;
+    }
 
-        this.leaves.forEach((leaf, index) => {
-            leaf.addEventListener('click', () => this.toggleLeaf(index));
+    connectedCallback() {
+        this.initialiseEventListeners();
+        // Initialise with collapsed state
+        this.setAttribute('data-expanded', 'false');
+        gsap.set(this, {
+            xPercent: -50,
+            yPercent: -50
         });
+
     }
 
-    // Store top and left positions of each leaf
-    calculatePositions() {
-        const container = document.querySelector('.backgroundContainer');
-        return Array.from(this.leaves).map(leaf => ({
-            top: (gsap.getProperty(leaf, 'top') / gsap.getProperty(container, 'height')) * 100,
-            left: (gsap.getProperty(leaf, 'left') / gsap.getProperty(container, 'width')) * 100
-        }));
+    initialiseEventListeners() {
+        this.addEventListener('click', (e) => this.handleLeafClick(e));
+        window.addEventListener('resize', () => this.handleResize());
     }
 
-    toggleLeaf(index) {
-        if (this.activeIndex !== null && this.activeIndex !== index) return;
+    handleLeafClick(e) {
+        e.preventDefault();
+        e.currentTarget.blur();
 
-        // If activeIndex is null, the leaf needs to flip
-        const isFlipping = this.activeIndex === null;
-        // If the leaf does not need to flip, there is no activeIndex
-        this.activeIndex = isFlipping ? index : null;
-        
-        const leaf = this.leaves[index];
-        const messageBox = this.messageBoxes[index];
+        if (this.initialPosition === null || this.initialRotation === null) this.initPositioning();
 
-        // Use the default config when not flipping leaf
-        const config = isFlipping ? LeafManager.CONFIG.expanded : LeafManager.CONFIG.default;
+        // Don't allow expansion if another leaf is already expanded
+        if (!this.isExpanded && Leaf.LEAVES.some(leaf => leaf.isExpanded)) return;
 
-        gsap.to(leaf, {
+        const config = this.getConfigurationForState();
+        this.toggleExpansion();
+        this.animateLeaf(config);
+    }
+
+    handleResize() {
+        messages.forEach(message => message.classList.remove('active'));
+
+        this.setAttribute('data-expanded', 'false');
+
+        this.removeAttribute('style');
+
+        // Kill any ongoing animations
+        gsap.killTweensOf(this)
+
+        // Clear GSAP inline styles
+        gsap.set(this, {
+            clearProps: "all",
+        });
+
+        gsap.set(this, {
+            xPercent: -50,
+            yPercent: -50
+        });
+
+        // Force a reflow
+        this.offsetHeight;
+
+        // Reset initial values
+        this.initialPosition = null;
+        this.initialRotation = null;
+
+        // Reinitialise positioning
+        this.initPositioning();
+    }
+
+
+    get isExpanded() {
+        return this.getAttribute('data-expanded') === 'true';
+    }
+
+    toggleExpansion() {
+        this.setAttribute('data-expanded', (!this.isExpanded).toString());
+    }
+
+    initPositioning() {
+        this.initialPosition = this.calculateInitialPosition(this);
+        this.initialRotation = this.calculateInitialRotation(this);
+    }
+
+    calculateInitialPosition(element) {
+        const tree = document.querySelector('.tree');
+        return {
+            top: `${(gsap.getProperty(element, 'top') / gsap.getProperty(tree, 'height')) * 100}%`,
+            left: `${(gsap.getProperty(element, 'left') / gsap.getProperty(tree, 'width')) * 100}%`
+        };
+    }
+
+    calculateInitialRotation(element) {
+        return {
+            x: gsap.getProperty(element, 'rotationX') ?? 0,
+            y: gsap.getProperty(element, 'rotationY') ?? 0,
+            z: gsap.getProperty(element, 'rotationZ') ?? 0
+        };
+    }
+
+    getConfigurationForState() {
+        const config = this.isExpanded ? Leaf.CONFIG.states.default : Leaf.CONFIG.states.expanded;
+        if (this.isExpanded) {
+            config.position = this.initialPosition;
+            config.rotation = this.initialRotation;
+        } else {
+            config.scale = mq.matches ? 3.5 : 7.5;
+        }
+        return {...config, animation: Leaf.CONFIG.animation};
+    }
+
+    animateLeaf(config) {
+        gsap.to(this, {
             scale: config.scale,
+            rotationX: config.rotation.x,
             rotationY: config.rotation.y,
             rotationZ: config.rotation.z,
-            top: isFlipping ? config.position.top : `${this.positions[index].top}%`,
-            left: isFlipping ? config.position.left : `${this.positions[index].left}%`,
-            xPercent: config.transform?.x ?? 0,
-            yPercent: config.transform?.y ?? 0,
-            zIndex: config.zIndex,
-            ...LeafManager.CONFIG.animation,
-            onStart: () => !isFlipping && (messageBox.style.display = 'none'),
-            onComplete: () => isFlipping && (messageBox.style.display = 'initial')
+            top: config.position.top,
+            left: config.position.left,
+            ...config.animation,
+            onStart: () => {
+                if (this.isExpanded) this.style.zIndex = config.zIndex;
+            },
+            onComplete: () => {
+                if (!this.isExpanded) this.style.zIndex = config.zIndex;
+            }
         });
     }
 }
 
-window.addEventListener('load', () => new LeafManager());
+customElements.define('leaf-element', Leaf);
+
+Leaf.LEAVES.forEach((leaf, idx) => {
+    leaf.addEventListener('click', () => {
+        if (messages.some(msg => msg.classList.contains('active')) && !messages[idx].classList.contains('active')) {
+            return;
+        }
+
+        leaf.setAttribute('disabled', true);
+
+        if (messages[idx].classList.contains('active')) {
+            messages[idx].classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = 'initial';
+            leaf.removeAttribute('disabled');
+        } else {
+            setTimeout(() => {
+                overlay.classList.toggle('active');
+                messages[idx].classList.toggle('active');
+                focusAndScroll(leaf).then(() => {
+                    document.body.style.overflow = 'hidden';
+                    leaf.removeAttribute('disabled');
+                });
+            }, ANIMATION_DURATION * 1000);
+        }
+    });
+});
+
+
+window.addEventListener('resize', () => {
+    messages.forEach(msg => {
+        msg.classList.remove('active');
+    });
+    overlay.classList.remove('active');
+    document.body.style.overflow = 'initial';
+});
+
+async function focusAndScroll(el) {
+    el.focus();
+
+    const elRect = el.getBoundingClientRect();
+    const elTop = window.scrollY + elRect.top;
+    const elHeight = elRect.height;
+    const windowHeight = window.innerHeight;
+
+    const targetScrollY = elTop - (windowHeight / 2) + (elHeight / 2);
+
+    await gsap.to(window, {
+        duration: 0.5,
+        scrollTo: {
+            y: targetScrollY
+        },
+        ease: "power2.out"
+    });
+}
