@@ -49,8 +49,8 @@ class Leaf extends HTMLElement {
 
     initialiseEventListeners() {
         this.addEventListener('click', (e) => this.handleLeafClick(e));
-        this.addEventListener('mouseover', () => this.handleLeafMouseOver());
-        this.addEventListener('mouseleave', () => this.handleLeafMouseLeave());
+        // this.addEventListener('mouseover', () => this.handleLeafMouseOver());
+        // this.addEventListener('mouseleave', () => this.handleLeafMouseLeave());
         window.addEventListener('resize', () => this.handleResize());
     }
 
@@ -73,7 +73,7 @@ class Leaf extends HTMLElement {
     }
 
     handleLeafMouseOver() {
-        if (this.isExpanded || this.isAnimating || mq.matches) {
+        if (this.isExpanded || this.isAnimating) {
             return;
         }
         if (this.initialPosition === null || this.initialRotation === null) this.initPositioning();
@@ -103,7 +103,7 @@ class Leaf extends HTMLElement {
     }
 
     handleLeafMouseLeave() {
-        if (this.isExpanded || this.isAnimating || mq.matches) {
+        if (this.isExpanded || this.isAnimating) {
             return;
         }
         // Kill any ongoing animations
