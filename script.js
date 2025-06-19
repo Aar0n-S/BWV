@@ -27,7 +27,7 @@ class Leaf extends HTMLElement {
         },
     };
 
-    static LEAVES = Array.from(document.querySelectorAll('button[is="leaf-element"]'));
+    static LEAVES = Array.from(document.querySelectorAll('leaf-element'));
 
     constructor() {
         super();
@@ -55,6 +55,7 @@ class Leaf extends HTMLElement {
     }
 
     handleLeafClick(e) {
+        if (this.getAttribute('disabled')) return;
         e.preventDefault();
         e.currentTarget.blur();
 
@@ -216,6 +217,8 @@ Leaf.LEAVES.forEach((leaf, idx) => {
         if (messages.some(msg => msg.classList.contains('active')) && !messages[idx].classList.contains('active')) {
             return;
         }
+
+        if (leaf.getAttribute('disabled')) return;
 
         leaf.setAttribute('disabled', true);
 

@@ -107,7 +107,7 @@ main {
   }
 }
 
-button[is="leaf-element"] {
+leaf-element {
   position: absolute;
   border: none;
   background: none;
@@ -187,7 +187,7 @@ button[is="leaf-element"] {
     height: 75vh;
   }
 
-  button[is="leaf-element"] {
+  leaf-element {
     height: 12rem;
     width: 50%;
     min-width: 10rem;
