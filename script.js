@@ -10,14 +10,14 @@ class Leaf extends HTMLElement {
         states: {
             default: {
                 scale: 1,
-                rotation: {x: 0, y: 0, z: 0},
-                position: {top: 0, left: 0},
+                rotation: { x: 0, y: 0, z: 0 },
+                position: { top: 0, left: 0 },
                 zIndex: 0
             },
             expanded: {
                 scale: 7.5,
-                rotation: {x: 180, y: 180, z: 45},
-                position: {top: '50%', left: '50%'},
+                rotation: { x: 180, y: 180, z: 45 },
+                position: { top: '50%', left: '50%' },
                 zIndex: 2,
             }
         },
@@ -33,6 +33,7 @@ class Leaf extends HTMLElement {
         super();
         this.initialPosition = null;
         this.initialRotation = null;
+        this.isAnimating = false;
     }
 
     connectedCallback() {
@@ -48,12 +49,17 @@ class Leaf extends HTMLElement {
 
     initialiseEventListeners() {
         this.addEventListener('click', (e) => this.handleLeafClick(e));
+        this.addEventListener('mouseover', () => this.handleLeafMouseOver());
+        this.addEventListener('mouseleave', () => this.handleLeafMouseLeave());
         window.addEventListener('resize', () => this.handleResize());
     }
 
     handleLeafClick(e) {
         e.preventDefault();
         e.currentTarget.blur();
+
+        // Kill any ongoing animations
+        gsap.killTweensOf(this);
 
         if (this.initialPosition === null || this.initialRotation === null) this.initPositioning();
 
@@ -65,15 +71,59 @@ class Leaf extends HTMLElement {
         this.animateLeaf(config);
     }
 
-    handleResize() {
-        messages.forEach(message => message.classList.remove('active'));
+    handleLeafMouseOver() {
+        if (this.isExpanded || this.isAnimating) {
+            return;
+        }
+        if (this.initialPosition === null || this.initialRotation === null) this.initPositioning();
 
+        gsap.to(
+            this,
+            {
+                rotation: this.initialRotation.z - 15,
+                duration: 1,
+                onComplete: () => {
+                    gsap.fromTo(
+                        this,
+                        { rotation: this.initialRotation.z - 15 },
+                        {
+                            duration: 2,
+                            rotation: this.initialRotation.z + 15,
+                            yoyo: true,
+                            repeat: -1,
+                            // transformOrigin: "center bottom",
+                            ease: "sine.inOut"
+                        }
+                    );
+                }
+
+            }
+        );
+    }
+
+    handleLeafMouseLeave() {
+        if (this.isExpanded || this.isAnimating) {
+            return;
+        }
+        // Kill any ongoing animations
+        gsap.killTweensOf(this);
+
+        gsap.to(
+            this,
+            {
+                rotation: this.initialRotation.z,
+                duration: 1
+            }
+        );
+    }
+
+    handleResize() {
         this.setAttribute('data-expanded', 'false');
 
         this.removeAttribute('style');
 
         // Kill any ongoing animations
-        gsap.killTweensOf(this)
+        gsap.killTweensOf(this);
 
         // Clear GSAP inline styles
         gsap.set(this, {
@@ -132,9 +182,10 @@ class Leaf extends HTMLElement {
             config.position = this.initialPosition;
             config.rotation = this.initialRotation;
         } else {
+            // TODO: Alter scales here
             config.scale = mq.matches ? 3.5 : 7.5;
         }
-        return {...config, animation: Leaf.CONFIG.animation};
+        return { ...config, animation: Leaf.CONFIG.animation };
     }
 
     animateLeaf(config) {
@@ -148,9 +199,11 @@ class Leaf extends HTMLElement {
             ...config.animation,
             onStart: () => {
                 if (this.isExpanded) this.style.zIndex = config.zIndex;
+                this.isAnimating = true;
             },
             onComplete: () => {
                 if (!this.isExpanded) this.style.zIndex = config.zIndex;
+                this.isAnimating = false;
             }
         });
     }
