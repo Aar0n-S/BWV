@@ -225,14 +225,14 @@ Leaf.LEAVES.forEach((leaf, idx) => {
         if (messages[idx].classList.contains('active')) {
             messages[idx].classList.toggle('active');
             overlay.classList.toggle('active');
-            if (mq.matches) document.body.style.overflow = 'initial';
+            if (!mq.matches) document.body.style.overflow = 'initial';
             leaf.removeAttribute('disabled');
         } else {
             setTimeout(() => {
                 overlay.classList.toggle('active');
                 messages[idx].classList.toggle('active');
                 focusAndScroll(leaf).then(() => {
-                    if (mq.matches) document.body.style.overflow = 'hidden';
+                    if (!mq.matches) document.body.style.overflow = 'hidden';
                     leaf.removeAttribute('disabled');
                 });
             }, ANIMATION_DURATION * 1000);
