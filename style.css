@@ -96,7 +96,6 @@ leaf-element {
   position: absolute;
   border: none;
   background: none;
-  height: auto;
   width: 8%;
   transform: rotateY(180deg) rotateZ(-90deg);
   transform-origin: center;
@@ -105,7 +104,6 @@ leaf-element {
 }
 leaf-element > img {
   width: 100%;
-  height: auto;
 }
 leaf-element:nth-of-type(1) {
   top: 52%;
@@ -162,9 +160,7 @@ leaf-element:nth-of-type(6) {
     display: none;
   }
   leaf-element {
-    height: 12rem;
     width: 50%;
-    min-width: 10rem;
   }
   leaf-element:nth-of-type(1) {
     top: 32%;

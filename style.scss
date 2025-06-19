@@ -111,7 +111,7 @@ leaf-element {
   position: absolute;
   border: none;
   background: none;
-  height: auto;
+  //height: auto;
   width: 8%;
   transform: rotateY(180deg) rotateZ(-90deg);
   transform-origin: center;
@@ -120,7 +120,7 @@ leaf-element {
 
   > img {
     width: 100%;
-    height: auto;
+    //height: auto;
   }
 
   &:nth-of-type(1) {
@@ -188,9 +188,7 @@ leaf-element {
   }
 
   leaf-element {
-    height: 12rem;
     width: 50%;
-    min-width: 10rem;
 
     &:nth-of-type(1) {
       top: 32%;
