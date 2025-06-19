@@ -1,24 +1,9 @@
 gsap.registerPlugin(ScrollToPlugin);
 
 const ANIMATION_DURATION = .85;
-
 const messages = Array.from(document.querySelectorAll('.bwv-display-message-box'));
-
 const mq = window.matchMedia('(max-width: 40em)');
-
 const overlay = document.querySelector('.overlay');
-
-async function focusAndScroll(el) {
-    el.focus();
-
-    await gsap.to(window, {
-        duration: 0.5,
-        scrollTo: {
-            y: el,
-        },
-        ease: "power2.out"
-    });
-}
 
 class Leaf extends HTMLElement {
     static CONFIG = {
@@ -175,24 +160,54 @@ customElements.define('leaf-element', Leaf);
 
 Leaf.LEAVES.forEach((leaf, idx) => {
     leaf.addEventListener('click', () => {
-        // If there is an active message which isn't this one, do nothing
         if (messages.some(msg => msg.classList.contains('active')) && !messages[idx].classList.contains('active')) {
             return;
         }
+
+        leaf.setAttribute('disabled', true);
+
         if (messages[idx].classList.contains('active')) {
             messages[idx].classList.toggle('active');
             overlay.classList.toggle('active');
             document.body.style.overflow = 'initial';
+            leaf.removeAttribute('disabled');
         } else {
             setTimeout(() => {
-                messages[idx].classList.toggle('active');
                 overlay.classList.toggle('active');
+                messages[idx].classList.toggle('active');
                 focusAndScroll(leaf).then(() => {
-                        document.body.style.overflow = 'hidden';
-                    }
-                )
-            }, ANIMATION_DURATION * 1000)
+                    document.body.style.overflow = 'hidden';
+                    leaf.removeAttribute('disabled');
+                });
+            }, ANIMATION_DURATION * 1000);
         }
-
     });
 });
+
+
+window.addEventListener('resize', () => {
+    messages.forEach(msg => {
+        msg.classList.remove('active');
+    });
+    overlay.classList.remove('active');
+    document.body.style.overflow = 'initial';
+});
+
+async function focusAndScroll(el) {
+    el.focus();
+
+    const elRect = el.getBoundingClientRect();
+    const elTop = window.scrollY + elRect.top;
+    const elHeight = elRect.height;
+    const windowHeight = window.innerHeight;
+
+    const targetScrollY = elTop - (windowHeight / 2) + (elHeight / 2);
+
+    await gsap.to(window, {
+        duration: 0.5,
+        scrollTo: {
+            y: targetScrollY
+        },
+        ease: "power2.out"
+    });
+}
