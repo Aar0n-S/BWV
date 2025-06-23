@@ -117,15 +117,14 @@ leaf-element {
   position: absolute;
   border: none;
   background: none;
-  //height: auto;
-  width: 8%;
-  transform: rotateY(180deg) rotateZ(-90deg);
+  /*   width: 8%; */
+  transform: rotateY(180deg) rotateZ(-90deg) scale(0.075);
   transform-origin: center;
   cursor: pointer;
   z-index: 0;
 
   >img {
-    width: 100%;
+    //width: 100%;
     //height: auto;
   }
 
@@ -146,17 +145,17 @@ leaf-element {
 
   &:nth-of-type(4) {
     top: 31%;
-    right: 15%;
+    left: 78%;
   }
 
   &:nth-of-type(5) {
     top: 41%;
-    right: 9%;
+    left: 74%;
   }
 
   &:nth-of-type(6) {
     top: 38%;
-    right: 24%;
+    left: 85%;
   }
 }
 
@@ -210,7 +209,8 @@ leaf-element {
   }
 
   leaf-element {
-    width: 50%;
+    //width: 50%;
+    transform: rotateY(180deg) rotateZ(-90deg) scale(0.2);
 
     &:nth-of-type(1) {
       top: 32%;
@@ -220,7 +220,7 @@ leaf-element {
     &:nth-of-type(2) {
       top: 48%;
       left: 76%;
-      transform: rotateY(0deg) rotateZ(-90deg);
+      transform: rotateY(0deg) rotateZ(-90deg) scale(0.2);
     }
 
     &:nth-of-type(3) {
