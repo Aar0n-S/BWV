@@ -27,7 +27,12 @@
 }
 
 // Headings
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-header), sans-serif;
   font-weight: 700;
 }
@@ -37,7 +42,8 @@ h1 {
 }
 
 // Body Text
-p, blockquote {
+p,
+blockquote {
   margin-block: 1em;
   line-height: 1.5;
   font-family: var(--font-body), sans-serif;
@@ -54,7 +60,7 @@ header {
   display: flex;
   width: 100%;
 
-  > img {
+  >img {
     width: 80%;
     height: auto;
   }
@@ -101,7 +107,7 @@ main {
   height: auto;
   position: relative;
 
-  > img {
+  >img {
     width: 100%;
     height: auto;
   }
@@ -118,7 +124,7 @@ leaf-element {
   cursor: pointer;
   z-index: 0;
 
-  > img {
+  >img {
     width: 100%;
     //height: auto;
   }
@@ -169,22 +175,38 @@ leaf-element {
   z-index: 5;
 }
 
+.vine {
+  display: none;
+}
+
 @media screen and (max-width: 40em) {
   header {
     justify-content: center;
 
-    > img {
+    >img {
       margin-inline: auto;
     }
   }
 
   .tree {
-    > img {
+    >img {
       display: none;
     }
 
     min-height: 32rem;
     height: 75vh;
+  }
+
+  .vine {
+    display: initial;
+    position: absolute;
+    top: 15%;
+    left: 15%;
+
+    img {
+      width: 80%;
+      height: auto;
+    }
   }
 
   leaf-element {
