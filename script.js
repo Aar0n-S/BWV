@@ -9,13 +9,13 @@ class Leaf extends HTMLElement {
     static CONFIG = {
         states: {
             default: {
-                scale: 1,
+                scale: 0.07,
                 rotation: { x: 0, y: 0, z: 0 },
                 position: { top: 0, left: 0 },
                 zIndex: 0
             },
             expanded: {
-                scale: 7.5,
+                scale: 1,
                 rotation: { x: 180, y: 180, z: 45 },
                 position: { top: '50%', left: '50%' },
                 zIndex: 2,
@@ -182,9 +182,10 @@ class Leaf extends HTMLElement {
         if (this.isExpanded) {
             config.position = this.initialPosition;
             config.rotation = this.initialRotation;
+            config.scale = mq.matches ? 0.2 : 0.07;
         } else {
             // TODO: Alter scales here
-            config.scale = mq.matches ? 3.5 : 7.5;
+//             config.scale = mq.matches ? 1 : 0.75;
         }
         return { ...config, animation: Leaf.CONFIG.animation };
     }
