@@ -2,8 +2,16 @@ gsap.registerPlugin(ScrollToPlugin);
 
 const ANIMATION_DURATION = .85;
 const messages = Array.from(document.querySelectorAll('.bwv-display-message-box'));
-const mq = window.matchMedia('(max-width: 40em)');
 const overlay = document.querySelector('.overlay');
+
+const mqMobile = window.matchMedia('(max-width: 40em)');
+const mqLarge = window.matchMedia('(min-width: 75em)');
+const mqExtraLarge = window.matchMedia('(min-width: 100em)');
+
+const defaultScaleMobile = 0.2;
+const defaultScaleMedium = 0.07;
+const defaultScaleLarge = 0.1;
+const defaultScaleExtraLarge = 0.15;
 
 class Leaf extends HTMLElement {
     static CONFIG = {
@@ -16,7 +24,7 @@ class Leaf extends HTMLElement {
             },
             expanded: {
                 scale: 1,
-                rotation: { x: 180, y: 180, z: 45 },
+                rotation: { x: 180, y: 180, z: -90 },
                 position: { top: '50%', left: '50%' },
                 zIndex: 2,
             }
@@ -73,7 +81,7 @@ class Leaf extends HTMLElement {
     }
 
     handleLeafMouseOver() {
-        if (this.isExpanded || this.isAnimating || mq.matches) {
+        if (this.isExpanded || this.isAnimating || mqMobile.matches) {
             return;
         }
         if (this.initialPosition === null || this.initialRotation === null) this.initPositioning();
@@ -103,7 +111,7 @@ class Leaf extends HTMLElement {
     }
 
     handleLeafMouseLeave() {
-        if (this.isExpanded || this.isAnimating || mq.matches) {
+        if (this.isExpanded || this.isAnimating || mqMobile.matches) {
             return;
         }
         // Kill any ongoing animations
@@ -182,10 +190,19 @@ class Leaf extends HTMLElement {
         if (this.isExpanded) {
             config.position = this.initialPosition;
             config.rotation = this.initialRotation;
-            config.scale = mq.matches ? 0.2 : 0.07;
+
+            if (mqMobile.matches) {
+                config.scale = defaultScaleMobile;
+            } else if (mqExtraLarge.matches) {
+                config.scale = defaultScaleExtraLarge;
+            } else if (mqLarge.matches) {
+                config.scale = defaultScaleLarge;
+            } else {
+                config.scale = defaultScaleMedium;
+            }
         } else {
             // TODO: Alter scales here
-//             config.scale = mq.matches ? 1 : 0.75;
+            //             config.scale = mq.matches ? 1 : 0.75;
         }
         return { ...config, animation: Leaf.CONFIG.animation };
     }
@@ -226,14 +243,14 @@ Leaf.LEAVES.forEach((leaf, idx) => {
         if (messages[idx].classList.contains('active')) {
             messages[idx].classList.toggle('active');
             overlay.classList.toggle('active');
-            if (!mq.matches) document.body.style.overflow = 'initial';
+            if (!mqMobile.matches) document.body.style.overflow = 'initial';
             leaf.removeAttribute('disabled');
         } else {
             setTimeout(() => {
                 overlay.classList.toggle('active');
                 messages[idx].classList.toggle('active');
                 focusAndScroll(leaf).then(() => {
-                    if (!mq.matches) document.body.style.overflow = 'hidden';
+                    if (!mqMobile.matches) document.body.style.overflow = 'hidden';
                     leaf.removeAttribute('disabled');
                 });
             }, ANIMATION_DURATION * 1000);

@@ -118,7 +118,7 @@ leaf-element {
   border: none;
   background: none;
   /*   width: 8%; */
-  transform: rotateY(180deg) rotateZ(-90deg) scale(0.075);
+  transform: rotateY(180deg) rotateZ(150deg) scale(0.075);
   transform-origin: center;
   cursor: pointer;
   z-index: 0;
@@ -210,7 +210,7 @@ leaf-element {
 
   leaf-element {
     //width: 50%;
-    transform: rotateY(180deg) rotateZ(-90deg) scale(0.2);
+    transform: rotateY(180deg) rotateZ(150deg) scale(0.2);
 
     &:nth-of-type(1) {
       top: 32%;
@@ -220,7 +220,7 @@ leaf-element {
     &:nth-of-type(2) {
       top: 48%;
       left: 76%;
-      transform: rotateY(0deg) rotateZ(-90deg) scale(0.2);
+      transform: rotateY(180deg) rotateZ(210deg) scale(0.2);
     }
 
     &:nth-of-type(3) {
@@ -233,6 +233,20 @@ leaf-element {
     &:nth-of-type(6) {
       display: none;
     }
+  }
+}
+
+@media screen and (min-width: 75em) {
+  leaf-element {
+    //width: 50%;
+    transform: rotateY(180deg) rotateZ(150deg) scale(0.1);
+  }
+}
+
+@media screen and (min-width: 100em) {
+  leaf-element {
+    //width: 50%;
+    transform: rotateY(180deg) rotateZ(150deg) scale(0.15);
   }
 }
 

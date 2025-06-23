@@ -77,7 +77,8 @@ main {
   width: 100vw;
   height: 100vh;
   background-color: black;
-  backdrop-filter: blur(5rem);
+  -webkit-backdrop-filter: blur(5rem);
+          backdrop-filter: blur(5rem);
   opacity: 80%;
   position: fixed;
   z-index: 1;
@@ -103,7 +104,7 @@ leaf-element {
   border: none;
   background: none;
   /*   width: 8%; */
-  transform: rotateY(180deg) rotateZ(-90deg) scale(0.075);
+  transform: rotateY(180deg) rotateZ(150deg) scale(0.075);
   transform-origin: center;
   cursor: pointer;
   z-index: 0;
@@ -177,7 +178,7 @@ leaf-element:nth-of-type(6) {
     height: auto;
   }
   leaf-element {
-    transform: rotateY(180deg) rotateZ(-90deg) scale(0.2);
+    transform: rotateY(180deg) rotateZ(150deg) scale(0.2);
   }
   leaf-element:nth-of-type(1) {
     top: 32%;
@@ -186,7 +187,7 @@ leaf-element:nth-of-type(6) {
   leaf-element:nth-of-type(2) {
     top: 48%;
     left: 76%;
-    transform: rotateY(0deg) rotateZ(-90deg) scale(0.2);
+    transform: rotateY(180deg) rotateZ(210deg) scale(0.2);
   }
   leaf-element:nth-of-type(3) {
     top: 72%;
@@ -194,6 +195,16 @@ leaf-element:nth-of-type(6) {
   }
   leaf-element:nth-of-type(4), leaf-element:nth-of-type(5), leaf-element:nth-of-type(6) {
     display: none;
+  }
+}
+@media screen and (min-width: 75em) {
+  leaf-element {
+    transform: rotateY(180deg) rotateZ(150deg) scale(0.1);
+  }
+}
+@media screen and (min-width: 100em) {
+  leaf-element {
+    transform: rotateY(180deg) rotateZ(150deg) scale(0.15);
   }
 }
 /* Message Box Styles */
@@ -214,6 +225,4 @@ leaf-element:nth-of-type(6) {
 /* Override Page Padding */
 .entry-content.wp-block-post-content.has-global-padding.is-layout-constrained.wp-container-core-post-content-is-layout-59fd419b.wp-block-post-content-is-layout-constrained {
   padding: 0;
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
