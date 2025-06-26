@@ -108,29 +108,33 @@ leaf-element {
   transform-origin: center;
   cursor: pointer;
   z-index: 0;
+  /*>img {
+    //width: 100%;
+    //height: auto;
+  }*/
 }
 leaf-element:nth-of-type(1) {
-  top: 52%;
-  left: 14%;
+  top: 50%;
+  left: 16%;
 }
 leaf-element:nth-of-type(2) {
-  top: 43%;
-  left: 22%;
+  top: 41%;
+  left: 25%;
 }
 leaf-element:nth-of-type(3) {
   top: 50%;
-  left: 29%;
+  left: 31%;
 }
 leaf-element:nth-of-type(4) {
-  top: 31%;
+  top: 28%;
   left: 78%;
 }
 leaf-element:nth-of-type(5) {
-  top: 41%;
-  left: 74%;
+  top: 35%;
+  left: 70%;
 }
 leaf-element:nth-of-type(6) {
-  top: 38%;
+  top: 36%;
   left: 85%;
 }
 
@@ -181,17 +185,19 @@ leaf-element:nth-of-type(6) {
     transform: rotateY(180deg) rotateZ(150deg) scale(0.2);
   }
   leaf-element:nth-of-type(1) {
-    top: 32%;
-    left: 32%;
+    top: 48%;
+    left: 80%;
+    transform: rotateY(180deg) rotateZ(210deg) scale(0.2);
   }
   leaf-element:nth-of-type(2) {
-    top: 48%;
-    left: 76%;
+    top: 86%;
+    left: 59%;
     transform: rotateY(180deg) rotateZ(210deg) scale(0.2);
   }
   leaf-element:nth-of-type(3) {
-    top: 72%;
-    left: 32%;
+    top: 53%;
+    left: 35%;
+    transform: rotateY(180deg) rotateZ(120deg) scale(0.2);
   }
   leaf-element:nth-of-type(4), leaf-element:nth-of-type(5), leaf-element:nth-of-type(6) {
     display: none;
