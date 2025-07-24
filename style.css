@@ -76,7 +76,8 @@ main {
   width: 100vw;
   height: 100vh;
   background-color: black;
-  backdrop-filter: blur(5rem);
+  -webkit-backdrop-filter: blur(5rem);
+          backdrop-filter: blur(5rem);
   opacity: 80%;
   position: fixed;
   z-index: 1;
@@ -147,7 +148,8 @@ leaf-element:nth-of-type(6) {
   pointer-events: none;
   z-index: 5;
   font-weight: 700;
-  backdrop-filter: blur(0.1rem);
+  -webkit-backdrop-filter: blur(0.1rem);
+          backdrop-filter: blur(0.1rem);
   color: black;
   padding: 1rem;
   border-radius: 0.5rem;
@@ -237,6 +239,4 @@ leaf-element:nth-of-type(6) {
 /* Override Page Padding */
 .entry-content.wp-block-post-content.has-global-padding.is-layout-constrained.wp-container-core-post-content-is-layout-59fd419b.wp-block-post-content-is-layout-constrained {
   padding: 0;
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
