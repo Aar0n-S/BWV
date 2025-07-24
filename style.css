@@ -1,4 +1,4 @@
-@import url(https://fonts.bunny.net/css?family=lato:700|montserrat:400);
+@import url(https://fonts.bunny.net/css?family=lato:400,700,900|montserrat:400,700,900);
 :root {
   --main-color: #8F0050;
   --secondary-color: #FCEBA7;
@@ -38,7 +38,6 @@ blockquote {
   margin-block: 1em;
   line-height: 1.5;
   font-family: var(--font-body), sans-serif;
-  font-weight: 400;
   font-size: var(--fs-base);
 }
 
@@ -77,8 +76,7 @@ main {
   width: 100vw;
   height: 100vh;
   background-color: black;
-  -webkit-backdrop-filter: blur(5rem);
-          backdrop-filter: blur(5rem);
+  backdrop-filter: blur(5rem);
   opacity: 80%;
   position: fixed;
   z-index: 1;
@@ -140,17 +138,25 @@ leaf-element:nth-of-type(6) {
 
 .bwv-display-message-box {
   display: none;
-  max-width: 42%;
   max-height: 35%;
   position: absolute;
   top: 50%;
   left: 49%;
   transform: translate(-50%, -50%);
-  font-weight: bold;
-  color: white;
   text-align: center;
   pointer-events: none;
   z-index: 5;
+  font-weight: 700;
+  backdrop-filter: blur(0.1rem);
+  color: black;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: #fff;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
+  box-shadow: -1px -1px 1px 1px rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.231372549);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.231372549);
+  max-width: 80%;
 }
 
 .vine {
@@ -231,4 +237,6 @@ leaf-element:nth-of-type(6) {
 /* Override Page Padding */
 .entry-content.wp-block-post-content.has-global-padding.is-layout-constrained.wp-container-core-post-content-is-layout-59fd419b.wp-block-post-content-is-layout-constrained {
   padding: 0;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */
